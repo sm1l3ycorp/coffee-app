@@ -11,38 +11,21 @@ import {
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
 
-
-function Alert(props) {
+const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-
 const App = () => {
-  const [cartItems, setCartItems] = useState([{id: 1, name: 'Americano', size: 's', price: '2.50', amount: 1}, {id: 2, name: 'Cappucino', size: 'm', price: '3.25', amount: 2}]);
+  const [cartItems, setCartItems] = useState([]);
   const [tempItem, setTempItem] = useState({});
-
-  const classes = useStyles();
   const [open, setOpenSuccess] = useState(false);
-
-  const handleClick = () => {
-    setOpenSuccess(true);
-  };
+  const [openCart, setOpenCart] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpenSuccess(false);
   };
 
@@ -50,24 +33,24 @@ const App = () => {
   }, [cartItems]);
 
   return (
-    <Router>
+    // <Router>
     <div className="App">
     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Cart Updated!
         </Alert>
       </Snackbar>
-      <Header cartItems={cartItems} />
-      <Switch>
-          <Route exact path="/">
+      <Header cartItems={cartItems} setOpenCart={setOpenCart} />
+      {/* <Switch> */}
+          {/* <Route exact path="/"> */}
           <Menu cartItems={cartItems} setCartItems={setCartItems} tempItem={tempItem} setTempItem={setTempItem} setOpenSuccess={setOpenSuccess} />
-          </Route>
-          <Route path="/cart">
-          <Cart cartItems={cartItems} setCartItems={setCartItems} />
-          </Route>
-        </Switch>
+          {/* </Route> */}
+          {/* <Route path="/cart"> */}
+          <Cart cartItems={cartItems} setCartItems={setCartItems} setOpenSuccess={setOpenSuccess} openCart={openCart} setOpenCart={setOpenCart} />
+          {/* </Route>
+        </Switch> */}
     </div>
-    </Router>
+    /* </Router> */
   );
 }
 

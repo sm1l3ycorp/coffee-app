@@ -30,7 +30,6 @@ const Menu = ({ cartItems, setCartItems, tempItem, setTempItem, setOpenSuccess }
   const [open, setOpen] = React.useState(false);
 
   const updateOrder = (item) => {
-    console.log(item)
     setTempItem(item);
     setOpen(true);
   }
@@ -65,14 +64,14 @@ const Menu = ({ cartItems, setCartItems, tempItem, setTempItem, setOpenSuccess }
 
     return (
         <MenuWrapper>    
-          <Order open={open} setOpen={setOpen} tempItem={tempItem} setOpenSuccess={setOpenSuccess}/>      
+          <Order open={open} setOpen={setOpen} tempItem={tempItem} setOpenSuccess={setOpenSuccess} cartItems={cartItems} setCartItems={setCartItems} />      
            {menuItems.map(item => 
             <MenuItems key={item.id} onClick={() => updateOrder(item)}>
                 <HtmlTooltip
                   title={
                     <>
                       <Typography color="inherit">Click to Order</Typography>
-                      <small>Small: ${item.prices.small} Medium: ${item.prices.medium} Large: ${item.prices.large}</small>
+                      <small>Small: ${item.prices.Small} Medium: ${item.prices.Medium} Large: ${item.prices.Large}</small>
                     </>
                   }
                 >
@@ -83,7 +82,7 @@ const Menu = ({ cartItems, setCartItems, tempItem, setTempItem, setOpenSuccess }
                       </Typography>
                       <img src={item.image} alt="" />
                       <Typography className={classes.description} color="textSecondary">
-                      {item.description}<br /><i>From ${item.prices.small}</i>
+                      {item.description}<br /><i>From ${item.prices.Small}</i>
                       </Typography>
                   </CardContent>
                   </Card>

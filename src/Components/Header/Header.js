@@ -7,8 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import CoffeeIcon from '@material-ui/icons/LocalCafe';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -23,30 +22,30 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
   
-  const Header = ({ cartItems }) => {
+  const Header = ({ cartItems, setOpenCart }) => {
     const classes = useStyles();
   
     return (
       <div className={classes.grow}>
         <AppBar position="static">
           <Toolbar>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          {/* <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}> */}
           <CoffeeIcon />
-          </Link>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          {/* </Link> */}
+          {/* <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}> */}
             <Typography className={classes.title} variant="h6" noWrap>
               Coffee App
             </Typography>  
-          </Link>
+          {/* </Link> */}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-            <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <IconButton aria-label="show cart items" color="inherit">
+            {/* <Link to="/cart" onClick={() => setOpenCart(true)} style={{ textDecoration: 'none', color: 'inherit' }}> */}
+              <IconButton aria-label="show cart items" color="inherit" onClick={() => setOpenCart(true)}>
                 <Badge badgeContent={cartItems.length} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-            </Link>
+            {/* </Link> */}
             </div>
           </Toolbar>
         </AppBar>

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Order = ( { open, setOpen, tempItem, setOpenSuccess }) => {
+const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartItems }) => {
   const classes = useStyles();
   const [fullWidth, setFullWidth] = useState(true);
   const [size, setSize] = useState('m');
@@ -81,9 +81,9 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess }) => {
                   id: 'coffee-size',
                 }}
               >
-                <MenuItem value="s">Small</MenuItem>
-                <MenuItem value="m">Medium</MenuItem>
-                <MenuItem value="l">Large</MenuItem>
+                <MenuItem value="Small">Small</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="Large">Large</MenuItem>
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -105,12 +105,17 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess }) => {
             <br />
             <Button 
                 onClick={() => {
-                    console.log(tempItem);
-                    console.log(`size:${size}`);
-                    console.log(`amount:${amount}`);
                     if (amount > 0 && amount < 11) {
-                    setOpenSuccess(true);
-                    handleClose();
+                      let tempData = [];
+                      tempItem.size = size;
+                      tempItem.amount = amount;
+                      tempItem.price = tempItem.prices[size];
+                      tempData.push(tempItem);
+                      const currentItems = cartItems;
+                      const newCart = currentItems.concat(tempData);
+                      setCartItems(newCart);
+                      setOpenSuccess(true);
+                      handleClose();
                     }
                 }} 
                 variant="contained" 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,15 +11,25 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-const Cart = ({ cartItems, setCartItems }) => {
-      
+const Cart = ({ cartItems, setCartItems, setOpenSuccess, openCart, setOpenCart }) => {
 const currency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
 
-const amount = cartItems ? cartItems.map(item => item.price) : 0;
+  const removeItem = (item) => {
+    const newItems = cartItems.filter(x => x.id !== item.id);
+    setCartItems(newItems);
+    setOpenSuccess(true);
+  }
+
+const amount = cartItems ? cartItems.map(item => item.price * item.amount) : 0;
 const subtotal = (amount.length > 0) ? amount.reduce((x, y) => parseFloat(x) + parseFloat(y)) : 0;
 const taxes = subtotal * .09;
 const total = subtotal + taxes;
@@ -43,9 +52,24 @@ const useStyles = makeStyles((theme) => ({
     margin-top: 2rem;    
   `;
 
+  const handleClose = () => {
+    setOpenCart(false);
+  };
+
     return (
         <CartWrapper>
-           <List className={classes.root}>
+          <Dialog
+        fullWidth={true}
+        maxWidth={'sm'}
+        open={openCart}
+        onClose={handleClose}
+        aria-labelledby="max-width-dialog-title"
+      >
+        <DialogTitle id="max-width-dialog-title">Cart Summary</DialogTitle>
+        <DialogContent>
+            <center>
+          <DialogContentText>
+          <List className={classes.root}>
            {cartItems && cartItems.length > 0 ? 
            cartItems.map(item => 
             <div key={item.id}>
@@ -53,11 +77,11 @@ const useStyles = makeStyles((theme) => ({
                         <ListItemAvatar>
                             <Tooltip title="Delete" arrow>
                             <IconButton aria-label="delete">
-                                <DeleteIcon />
+                                <DeleteIcon onClick={() => removeItem(item)} />
                             </IconButton>
                             </Tooltip>
                         </ListItemAvatar>
-                        <ListItemText primary={`x${item.amount} ${item.size.toUpperCase()} ${item.name}`} secondary={`${currency.format(parseFloat(item.price * item.amount))}`}/>
+                        <ListItemText primary={`x${item.amount} ${item.size} ${item.name}`} secondary={`${currency.format(parseFloat(item.price * item.amount))}`}/>
                     </ListItem>
                     <Divider variant="inset" component="li" />
             </div>       
@@ -67,11 +91,20 @@ const useStyles = makeStyles((theme) => ({
             <>
                 <i>Subtotal: {currency.format(subtotal)}<br />
                 Tax: {currency.format(taxes)}<br /></i>
-                <b>Total: {currency.format(total)}</b><br />
-                <Button variant="contained" color="primary">Checkout</Button>
+                <b>Total: {currency.format(total)}</b><br /><br />
+                <Button variant="contained" color="primary" onClick={() => setCartItems([])} >Checkout</Button>
             </>
             }
             </List>
+          </DialogContentText>
+          </center>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
         </CartWrapper>
     )
 }
