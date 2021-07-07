@@ -1,13 +1,13 @@
 {"menu" : 
     [
-        {"id": 1, "name": "Americano","description": "Espresso with added hot water.","prices": {"Small": "1.50","Medium": "2.00","Large": "2.75"}, "image": "/images/americano.jpg"},
-        {"id": 2, "name": "Café Latte","description": "A tall, mild 'milk coffee.'","prices": {"Small": "1.50","Medium": "2.25","Large": "3.00"}, "image": "/images/Caffe_Latte.jpg"},
-        {"id": 3, "name": "Café Mocha","description": "A caffè latte with chocolate and whipped cream.","prices": {"Small": "2.50","Medium": "3.25","Large": "3.75"}, "image": "/images/Cafe_Mocha.jpg"},
-        {"id": 4, "name": "Cappuccino","description": "Espresso with milk foam mixture.","prices": {"Small": "1.50","Medium": "2.75","Large": "3.50"}, "image": "/images/cappuccino_0.jpg"},
-        {"id": 5, "name": "Espresso","description": "A small strong coffee.","prices": {"Small": "1.25","Medium": "1.75","Large": "2.25"}, "image": "/images/espresso.jpg"},
-        {"id": 6, "name": "Espresso Macchiato","description": "Espresso with a little milk foam.","prices": {"Small": "1.25","Medium": "2.00","Large": "2.50"}, "image": "/images/macchiato.jpg"},
-        {"id": 7, "name": "Frappé","description": "Blended coffee made of espresso, milk and ice.","prices": {"Small": "3.25","Medium": "4.50","Large": "6.25"}, "image": "/images/Frappe.jpg"},
-        {"id": 8, "name": "Iced Mocha","description": "Iced coffee made of espresso, milk and ice.","prices": {"Small": "1.75","Medium": "2.50","Large": "3.00"}, "image": "/images/ice%20latte.jpg"},
-        {"id": 9, "name": "Latte Macchiato","description": "Caffè latte, but with a thicker layer of foam.","prices": {"Small": "2.00","Medium": "2.75","Large": "3.25"}, "image": "/images/latte_macchiato.jpg"}
+        {"id": 1, "name": "Americano","description": "Espresso with added hot water.","prices": {"Small": "1.50","Medium": "2.00","Large": "2.75"}, "image": "./images/americano.jpg"},
+        {"id": 2, "name": "Café Latte","description": "A tall, mild 'milk coffee.'","prices": {"Small": "1.50","Medium": "2.25","Large": "3.00"}, "image": "./images/Caffe_Latte.jpg"},
+        {"id": 3, "name": "Café Mocha","description": "A caffè latte with chocolate and whipped cream.","prices": {"Small": "2.50","Medium": "3.25","Large": "3.75"}, "image": "./images/Cafe_Mocha.jpg"},
+        {"id": 4, "name": "Cappuccino","description": "Espresso with milk foam mixture.","prices": {"Small": "1.50","Medium": "2.75","Large": "3.50"}, "image": "./images/cappuccino_0.jpg"},
+        {"id": 5, "name": "Espresso","description": "A small strong coffee.","prices": {"Small": "1.25","Medium": "1.75","Large": "2.25"}, "image": "./images/espresso.jpg"},
+        {"id": 6, "name": "Espresso Macchiato","description": "Espresso with a little milk foam.","prices": {"Small": "1.25","Medium": "2.00","Large": "2.50"}, "image": "./images/macchiato.jpg"},
+        {"id": 7, "name": "Frappé","description": "Blended coffee made of espresso, milk and ice.","prices": {"Small": "3.25","Medium": "4.50","Large": "6.25"}, "image": "./images/Frappe.jpg"},
+        {"id": 8, "name": "Iced Mocha","description": "Iced coffee made of espresso, milk and ice.","prices": {"Small": "1.75","Medium": "2.50","Large": "3.00"}, "image": "./images/ice%20latte.jpg"},
+        {"id": 9, "name": "Latte Macchiato","description": "Caffè latte, but with a thicker layer of foam.","prices": {"Small": "2.00","Medium": "2.75","Large": "3.25"}, "image": "./images/latte_macchiato.jpg"}
     ]
 }
