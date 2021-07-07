@@ -26,6 +26,22 @@ const useStyles = makeStyles({
     },
   });
 
+  const MenuWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;`;
+
+  const MenuItems = styled.div`
+    color: #3f51b5;
+    &:hover {
+        transform: scale(1.1)
+      }
+    padding-right: 3rem;
+    padding-bottom: 3rem;`;
+
 const Menu = ({ cartItems, setCartItems, tempItem, setTempItem, setOpenSuccess }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -46,27 +62,11 @@ const Menu = ({ cartItems, setCartItems, tempItem, setTempItem, setOpenSuccess }
       },
     }))(Tooltip);
 
-    const MenuWrapper = styled.div`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 2rem;`;
-
-    const MenuItems = styled.div`
-        color: #3f51b5;
-        &:hover {
-            transform: scale(1.1)
-          }
-        padding-right: 3rem;
-        padding-bottom: 3rem;`;
-
     return (
         <MenuWrapper>    
           <Order open={open} setOpen={setOpen} tempItem={tempItem} setOpenSuccess={setOpenSuccess} cartItems={cartItems} setCartItems={setCartItems} />      
-           {menuItems.map(item => 
-            <MenuItems key={item.id} onClick={() => updateOrder(item)}>
+           {menuItems.map((item, index) => 
+            <MenuItems key={index} onClick={() => updateOrder(item)}>
                 <HtmlTooltip
                   title={
                     <>

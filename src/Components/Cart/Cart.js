@@ -17,17 +17,24 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const Cart = ({ cartItems, setCartItems, setOpenSuccess, openCart, setOpenCart }) => {
+const CartWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;    
+`;
+
+const Cart = ({ cartItems, setCartItems, setOpenSuccess, openCart, setOpenCart,setOrderSuccess }) => {
 const currency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
 
-  const removeItem = (item) => {
-    const newItems = cartItems.filter(x => x.id !== item.id);
-    setCartItems(newItems);
-    setOpenSuccess(true);
-  }
+const removeItem = (item) => {
+  const newItems = cartItems.filter(x => x.id !== item.id && x.size !== item.size);
+  setCartItems(newItems);
+  setOpenSuccess(true);
+}
 
 const amount = cartItems ? cartItems.map(item => item.price * item.amount) : 0;
 const subtotal = (amount.length > 0) ? amount.reduce((x, y) => parseFloat(x) + parseFloat(y)) : 0;
@@ -44,13 +51,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const classes = useStyles();
-
-  const CartWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;    
-  `;
 
   const handleClose = () => {
     setOpenCart(false);
@@ -71,8 +71,8 @@ const useStyles = makeStyles((theme) => ({
           <DialogContentText>
           <List className={classes.root}>
            {cartItems && cartItems.length > 0 ? 
-           cartItems.map(item => 
-            <div key={item.id}>
+           cartItems.map((item, index) => 
+            <div key={index}>
                      <ListItem>
                         <ListItemAvatar>
                             <Tooltip title="Delete" arrow>
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
                 <i>Subtotal: {currency.format(subtotal)}<br />
                 Tax: {currency.format(taxes)}<br /></i>
                 <b>Total: {currency.format(total)}</b><br /><br />
-                <Button variant="contained" color="primary" onClick={() => setCartItems([])} >Checkout</Button>
+                <Button variant="contained" color="primary" onClick={() => { setOpenCart(false); setCartItems([]); setOrderSuccess(true);}} >Checkout</Button>
             </>
             }
             </List>

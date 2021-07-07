@@ -30,13 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartItems }) => {
   const classes = useStyles();
-  const [fullWidth, setFullWidth] = useState(true);
-  const [size, setSize] = useState('m');
+  const [size, setSize] = useState('Medium');
   const [amount, setAmount] = useState('0');
-
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
 
   const handleClose = () => {
     setOpen(false);
@@ -56,7 +51,7 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartIte
   return (
     <>
       <Dialog
-        fullWidth={fullWidth}
+        fullWidth={true}
         maxWidth={'sm'}
         open={open}
         onClose={handleClose}
@@ -107,12 +102,17 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartIte
                 onClick={() => {
                     if (amount > 0 && amount < 11) {
                       let tempData = [];
+                      console.log('cartItems', cartItems)
                       tempItem.size = size;
                       tempItem.amount = amount;
                       tempItem.price = tempItem.prices[size];
                       tempData.push(tempItem);
+                      console.log('tempItem', tempItem)
+                      console.log('tempData', tempData)
                       const currentItems = cartItems;
-                      const newCart = currentItems.concat(tempData);
+                      console.log('currentItems', currentItems)
+                      const newCart = tempData.concat(currentItems);
+                      console.log('newCart', newCart)
                       setCartItems(newCart);
                       setOpenSuccess(true);
                       handleClose();
