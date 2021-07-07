@@ -1,23 +1,23 @@
-import { React, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import { React, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 'auto', 
-    width: 'fit-content',
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    width: "fit-content",
   },
   formControl: {
     marginTop: theme.spacing(2),
@@ -28,52 +28,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartItems }) => {
+const Order = ({
+  open,
+  setOpen,
+  tempItem,
+  setOpenSuccess,
+  cartItems,
+  setCartItems,
+}) => {
   const classes = useStyles();
-  const [size, setSize] = useState('Medium');
-  const [amount, setAmount] = useState('0');
+  const [size, setSize] = useState("Medium");
+  const [amount, setAmount] = useState("0");
 
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleSizeChange = (event) => {
-    console.log(event.target.value);
     setSize(event.target.value);
   };
 
   const handleAmountChange = (event) => {
-    console.log(event.target.value);
     setAmount(event.target.value);
   };
-
 
   return (
     <>
       <Dialog
         fullWidth={true}
-        maxWidth={'sm'}
+        maxWidth={"sm"}
         open={open}
         onClose={handleClose}
         aria-labelledby="max-width-dialog-title"
       >
-        <DialogTitle id="max-width-dialog-title">Customize your {tempItem.name}</DialogTitle>
+        <DialogTitle id="max-width-dialog-title">
+          Customize your {tempItem.name}
+        </DialogTitle>
         <DialogContent>
-            <center>
-          <DialogContentText>
-            {tempItem.length && <>Small: ${tempItem.prices.small} Medium: ${tempItem.prices.medium} Large: ${tempItem.prices.large} </>}
-          </DialogContentText>
+          <center>
+            <DialogContentText>
+              {tempItem.length && (
+                <>
+                  Small: ${tempItem.prices.small} Medium: $
+                  {tempItem.prices.medium} Large: ${tempItem.prices.large}{" "}
+                </>
+              )}
+            </DialogContentText>
           </center>
           <form className={classes.form} noValidate>
             <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="coffee-size">Size</InputLabel>
+              <InputLabel htmlFor="coffee-size">Size</InputLabel>
               <Select
                 autoFocus
                 value={size}
                 onChange={handleSizeChange}
                 inputProps={{
-                  name: 'coffee-size',
-                  id: 'coffee-size',
+                  name: "coffee-size",
+                  id: "coffee-size",
                 }}
               >
                 <MenuItem value="Small">Small</MenuItem>
@@ -82,47 +93,43 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartIte
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
-            <TextField
+              <TextField
                 id="standard-number"
                 label="Amount"
                 type="number"
                 InputLabelProps={{
-                    shrink: true,
+                  shrink: true,
                 }}
                 InputProps={{
-                    inputProps: { 
-                        max: 10, min: 1 
-                    }
+                  inputProps: {
+                    max: 10,
+                    min: 1,
+                  },
                 }}
                 onChange={handleAmountChange}
-            />
+              />
             </FormControl>
             <br />
-            <Button 
-                onClick={() => {
-                    if (amount > 0 && amount < 11) {
-                      let tempData = [];
-                      console.log('cartItems', cartItems)
-                      tempItem.size = size;
-                      tempItem.amount = amount;
-                      tempItem.price = tempItem.prices[size];
-                      tempData.push(tempItem);
-                      console.log('tempItem', tempItem)
-                      console.log('tempData', tempData)
-                      const currentItems = cartItems;
-                      console.log('currentItems', currentItems)
-                      const newCart = tempData.concat(currentItems);
-                      console.log('newCart', newCart)
-                      setCartItems(newCart);
-                      setOpenSuccess(true);
-                      handleClose();
-                    }
-                }} 
-                variant="contained" 
-                color="primary"
+            <Button
+              onClick={() => {
+                if (amount > 0 && amount < 11) {
+                  let tempData = [];
+                  tempItem.size = size;
+                  tempItem.amount = amount;
+                  tempItem.price = tempItem.prices[size];
+                  tempData.push(tempItem);
+                  const currentItems = cartItems;
+                  const newCart = tempData.concat(currentItems);
+                  setCartItems(newCart);
+                  setOpenSuccess(true);
+                  handleClose();
+                }
+              }}
+              variant="contained"
+              color="primary"
             >
-            Add
-          </Button>
+              Add
+            </Button>
           </form>
         </DialogContent>
         <DialogActions>
@@ -133,6 +140,6 @@ const Order = ( { open, setOpen, tempItem, setOpenSuccess, cartItems, setCartIte
       </Dialog>
     </>
   );
-}
+};
 
 export default Order;
