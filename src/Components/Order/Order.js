@@ -87,9 +87,9 @@ const Order = ({
                   id: "coffee-size",
                 }}
               >
-                <MenuItem value="Small">Small</MenuItem>
+                {/* <MenuItem value="Small">Small</MenuItem> */}
                 <MenuItem value="Medium">Medium</MenuItem>
-                <MenuItem value="Large">Large</MenuItem>
+                {/* <MenuItem value="Large">Large</MenuItem> */}
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -113,14 +113,12 @@ const Order = ({
             <Button
               onClick={() => {
                 if (amount > 0 && amount < 11) {
-                  let tempData = [];
+                  let tempData = [...cartItems];
                   tempItem.size = size;
                   tempItem.amount = amount;
                   tempItem.price = tempItem.prices[size];
                   tempData.push(tempItem);
-                  const currentItems = cartItems;
-                  const newCart = tempData.concat(currentItems);
-                  setCartItems(newCart);
+                  setCartItems(tempData);
                   setOpenSuccess(true);
                   handleClose();
                 }

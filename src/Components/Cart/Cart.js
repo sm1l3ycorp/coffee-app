@@ -39,7 +39,6 @@ const Cart = ({
 
   const removeItem = (item) => {
     const newItems = cartItems.filter(
-      (x) => x.id !== item.id && x.size !== item.size
     );
     setCartItems(newItems);
     setOpenSuccess(true);
