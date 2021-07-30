@@ -38,8 +38,7 @@ const Cart = ({
   });
 
   const removeItem = (item) => {
-    const newItems = cartItems.filter(
-    );
+    const newItems = cartItems.filter((x) => x.id !== item.id);
     setCartItems(newItems);
     setOpenSuccess(true);
   };
